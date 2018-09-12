@@ -129,5 +129,8 @@ app.use('/', userRoutes)
 const axiRoutes = require('./routes/axi')
 app.use('/', axiRoutes)
 
+const apiRoutes = require('./routes/api')
+app.use('/', apiRoutes)
+
 
 module.exports = app;

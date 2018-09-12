@@ -1,25 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log("script running");
   // document.getElementById('fetch-movies').onclick = () =>{
-  document.getElementById("fetch-movies").onclick = () => {
-    axios.get('http://localhost:3000/api/movies')
-      .then((allMovies) => {
-        console.log(allMovies)
+  document.getElementById("fetch-movies").onclick = getMovies
 
+function getMovies(){
 
-        const results = document.getElementById("results")
-        allMovies.data.forEach((each) => {
-          console.log(each)
+  axios.get('http://localhost:3000/api/movies')
+  .then((allMovies) => {
+    console.log(allMovies)
+    const results = document.getElementById("results")
+    allMovies.data.forEach((each) => {
+      console.log(each)
 
-          results.innerHTML += `
-          <h2 style="color: black"> ${each.title} <h2>
-        `
-        })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+      results.innerHTML += `
+      <h2 style="color: black"> ${each.title} <h2>
+      <h5 style="color: black"> ${each.plot} <h5>
+      <h5 style="color: black"> ${each.plot} <h5>
+      <img class="" width="300px"  src=' ${each.image}' alt="Card image cap">
+      `
+
+    })
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+}
+
 
   document.getElementById('form-movies').onclick = () => {
     var dummy = '<span>Label: <input type="text"><small>(ft)</small></span>\r\n';
@@ -48,8 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
 document.querySelector(".newform").onsubmit = function(e){
 
   // const theResultDiv = document.querySelector(".characters-container")
-  axios.post('/movies/create',{title: req.body.newmovie})
-  console.lof(newData)
+  axios.post('/movies/create')
+  .then((data)=>{
+    getMovies()
+    console.log(newData)
+
+  })
+
   // .then((response) => {
   //   console.log(response)
   //   // getAllCharacters();

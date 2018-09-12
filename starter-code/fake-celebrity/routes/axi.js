@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Movie = require('../models/movie')
+const Celebrity = require('../models/celebrity')
 
 router.get("/axi", (req, res, next) =>{
 
