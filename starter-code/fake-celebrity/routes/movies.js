@@ -88,6 +88,7 @@ router.post('/movies/create', (req, res, next) => {
     plot: req.body.plot,
     owner: req.user._id
   }
+  console.log(newMovie)
   Movie.create(newMovie)
     .then((data) => {
       // console.log(req.body.celebrity)
@@ -117,6 +118,10 @@ router.get('/movies/:id', (req, res, next) => {
     })
     .catch(next)
 
+})
+
+router.get('/movie/fancy', (req, res, next)=>{
+  res.render('movies/fancy')
 })
 
 

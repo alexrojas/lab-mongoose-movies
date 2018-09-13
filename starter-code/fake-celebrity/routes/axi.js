@@ -13,16 +13,16 @@ router.get('/axi/movies', (req, res, next)=>{
   res.render("axi/movies")
 })
 
-router.get('/api/movies', (req, res, next)=>{
-  Movie.find()
-  .then((data)=>{
-    res.json(data)
-  })
-  .catch((err)=>{
-    res.json(err)
-  })
-
-})
+// router.get('/api/movies', (req, res, next)=>{
+//   Movie.find()
+//   .then((data)=>{
+//     res.json(data)
+//   })
+//   .catch((err)=>{
+//     res.json(err)
+//   })
+//
+// })
 
 
 module.exports = router
