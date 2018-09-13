@@ -1,7 +1,7 @@
 <h2>Create a new celebrity</h2>
 
 
-<form action="/celebrities/create" method="POST">
+<form action="/celebrities/create" method="POST" enctype="multipart/form-data">
 
     <label for="">name</label>
     <input type="text" name="name" placeholder="name">
@@ -11,6 +11,8 @@
 
     <label for="">Image url</label>
     <input type="text" name="image" placeholder="image">
+
+    <input type="file" name="photo">
 
     <label for="">catchPhrase</label>
     <input type="text" name="catchPhrase" placeholder="Phrase">

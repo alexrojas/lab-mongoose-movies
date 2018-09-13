@@ -7,7 +7,9 @@ const moviesSchema = new Schema({
   celebrity: {type: Schema.Types.ObjectId, ref: "Celebrity"},
   genre: String,
   plot: String,
-  owner: {type: Schema.Types.ObjectId}
+  owner: {type: Schema.Types.ObjectId},
+  imgName: String,
+  imgPath: String,
 },{
   timestamps: {
     createdAt: "created_at",

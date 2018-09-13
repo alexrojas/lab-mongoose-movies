@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Celebrity = require('../models/celebrity')
+const multer  = require('multer');
 
 
 router.get('/celebrities/index', (req, res, next) => {
@@ -14,17 +15,24 @@ router.get('/celebrities/index', (req, res, next) => {
     .catch(next)
 });
 
-router.post('/celebrities/create', (req, res, next) => {
+const upload = multer({ dest: './public/uploads/' });
+
+router.post('/celebrities/create', upload.single('photo'),  (req, res, next) => {
   let name = req.body.name
   let ocup = req.body.ocuppation
+  let path = `/uploads/${req.file.filename}`
+  let originalName = req.file.originalname
   let catchP = req.body.catchPhrase
-  console.log(req.body.image)
+  console.log(req.file)
   let allinfo = {
     name: name,
     image: req.body.image,
+    path: path,
+    originalName: originalName,
     ocupation: ocup,
     catchPhrase: catchP
   }
+
   Celebrity.create(allinfo)
     .then((data) => {
       console.log(data)
@@ -99,6 +107,7 @@ router.get('/celebrities/:id', (req, res, next) => {
     })
     .catch(next)
 });
+
 
 
 

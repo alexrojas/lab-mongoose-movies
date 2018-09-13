@@ -3,6 +3,8 @@ const router = express.Router()
 const Movie = require('../models/movie')
 const Celebrity = require('../models/celebrity')
 const ensureLogin = require("connect-ensure-login");
+const multer  = require('multer');
+const uploadCloud = require('../config/cloudinary');
 
 router.get('/movies/index', (req, res, next) => {
   Movie.find().populate('celebrity')
@@ -77,7 +79,7 @@ router.post('/movies/update/:id', ensureLogin.ensureLoggedIn('/login'), (req, re
 })
 
 
-router.post('/movies/create', (req, res, next) => {
+router.post('/movies/create', uploadCloud.single('photo'), (req, res, next) => {
   // console.log(req.body.celebrity)
   console.log(">>>>>", req.body)
   let newMovie = {
@@ -86,7 +88,9 @@ router.post('/movies/create', (req, res, next) => {
     celebrity: req.body.celebrity,
     genre: req.body.genre,
     plot: req.body.plot,
-    owner: req.user._id
+    owner: req.user._id,
+    imgName: req.file.originalname,
+    imgPath: req.file.url
   }
   console.log(newMovie)
   Movie.create(newMovie)
